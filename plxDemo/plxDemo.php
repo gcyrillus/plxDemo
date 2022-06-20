@@ -25,7 +25,11 @@
             echo self::BEGIN_CODE;
 ?>		
 		foreach ($_GET as $key => $value) if($key !='p') $_GET[$key] =''; // tri sur $_GET
-		if(isset($_SESSION['user']) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));}
+
+		if(isset($_SESSION['user']) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
+			plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));
+			$plxAdmin->aUsers['001']['delete']=1;
+			}
 		if(!empty($_POST) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) != 'auth.php'){// declinaison possible pour plusieurs profils
 			if (!isset($_POST['preview'])) {
 				$_POST= array(); // just in case ...
