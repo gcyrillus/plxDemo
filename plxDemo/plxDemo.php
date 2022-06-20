@@ -6,6 +6,7 @@
     class plxDemo extends plxPlugin {
         const HOOKS = array(
 			'AdminPrepend',
+			'AdminAuth',
         );
         const BEGIN_CODE = '<?php' . PHP_EOL;
         const END_CODE = PHP_EOL . '?>';
@@ -37,6 +38,18 @@
 				exit;
 				}
 			}
+<?php
+            echo self::END_CODE;						
+        }
+		
+ public function AdminAuth() {
+			
+            echo self::BEGIN_CODE;
+?>		
+		echo '<p style="text-align:left">
+				Login de connexion: <strong>demo</strong><br />
+				Mot de passe: <strong>demo</strong><br />
+			</p>';
 <?php
             echo self::END_CODE;						
         }
