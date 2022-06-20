@@ -28,7 +28,7 @@
 
 		if(isset($_SESSION['user']) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
 			plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));
-			$plxAdmin->aUsers['001']['delete']=1;
+			foreach($plxAdmin->aUsers as $_userid => $_user) if ( $plxAdmin->aUsers[$_userid]['login'] !=='demo') $plxAdmin->aUsers[$_userid]['delete']=1;;
 			}
 		if(!empty($_POST) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) != 'auth.php'){// declinaison possible pour plusieurs profils
 			if (!isset($_POST['preview'])) {
