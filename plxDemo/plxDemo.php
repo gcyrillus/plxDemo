@@ -23,8 +23,8 @@
  public function AdminPrepend() {
 			
             echo self::BEGIN_CODE;
-?>		
-		foreach ($_GET as $key => $value) if($key !='p') $_GET[$key] =''; // tri sur $_GET
+?>		$getOkay= array('p','a','sel');
+		foreach ($_GET as $key => $value) if(!in_array($key , $getOkay)) $_GET[$key] =''; // tri sur $_GET
 
 		if(isset($_SESSION['user']) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
 			plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));
