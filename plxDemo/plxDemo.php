@@ -31,7 +31,7 @@
 			plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));
 			foreach($plxAdmin->aUsers as $_userid => $_user) if ( $plxAdmin->aUsers[$_userid]['login'] !=='demo') $plxAdmin->aUsers[$_userid]['delete']=1;;
 			}
-		if(!empty($_POST) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) != 'auth.php'){// declinaison possible pour plusieurs profils
+		if(!empty($_POST) && $plxAdmin->aUsers[$_SESSION['user']]['login'] =='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php'){// declinaison possible pour plusieurs profils
 			if (!isset($_POST['preview'])) {
 				$_POST= array(); // just in case ...
 				header('Location: '.$_SERVER['HTTP_REFERER']);
