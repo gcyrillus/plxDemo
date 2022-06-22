@@ -2,11 +2,9 @@
 <document>
    <title>plxDemo</title>
    <author>GC-nomade</author>
-   <version>0.0.2</version>
-   <date>20/06/2022</date>
+   <version>0.1.0</version>
+   <date>22/06/2022</date>
     <site>http://re7net.com</site>
     <repository>https://github.com/gcyrillus</repository>
-   <description> restreint un utilisateur demo à la navigation dans l'admin sans pouvoir valider de modifications ou d'ajouts (via $_POST ou $_GET). 
-   !!! Attention Version Bêta qui ne gere pas les plugins contournant ou omettant les verification des connexions et des droits ou utilisant $_GET['p'] de façon detourné.!!!
-     Configuration :  Créer un utilisateur demo (nom,login,mdp = demo avec un mail bidon) pour laisser un aperçu de votre administration. </description>
+   <description>Injecte 5 profiles inertes permettant de se connecter en 'mode Démonstration' à l'administration. en ne voyant que les profiles de démonstration.</description>
 </document>
