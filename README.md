@@ -1,7 +1,7 @@
 # plxDemo
 Gives a demo access to administration without allowing saving changes. 
 
-Donne accés à l'administration sans possibilités de sauvegardes.
+Donne accés à l'administration sans possibilités de sauvegardes , en reprenant les 5 profils natifs de PluXml.
 
 <img src="https://github.com/gcyrillus/plxDemo/blob/main/adminDemo.jpg?raw=true">
 
