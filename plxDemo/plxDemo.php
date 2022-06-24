@@ -22,7 +22,7 @@
                 $this->addHook($hook, $hook);
             }
         }
-
+# filtre les variables $_GET et $_POST pour les utilisateurs de démonstration.
  public function AdminPrepend() {
 			
             echo self::BEGIN_CODE;
@@ -45,7 +45,7 @@
 <?php
             echo self::END_CODE;						
         }
-		
+# donne dans le formulaire les infos de login et passe pour le mode démonstration		
  public function AdminAuth() {
 			
             echo self::BEGIN_CODE;
@@ -62,16 +62,12 @@
             echo self::END_CODE;						
         }
 		
-		
+#injecte les utilisateurs de demonstration au tableau des aUsers		
  public function plxMotorGetUsers() {
 			
             echo self::BEGIN_CODE;
 ?>		
 		
-		
-
-		
-			
 # Chargement des fichiers de langue en fonction du profil de l'utilisateur connecté
 loadLang(PLX_CORE.'lang/'.$lang.'/admin.php');
 loadLang(PLX_CORE.'lang/'.$lang.'/core.php');
@@ -79,8 +75,8 @@ loadLang(PLX_CORE.'lang/'.$lang.'/core.php');
 # on stocke la langue utilisée pour l'affichage de la zone d'administration en variable de session
 # nb: la langue peut etre modifiée par le hook AdminPrepend via des plugins
 $_SESSION['admin_lang'] = $lang;
-			
-	
+
+# on créer notre tableau d'utilisateurs de demonstration	
 		$newDemoUsers = array(
 		'001'=> array(
 			'active' => '1' , 
@@ -154,22 +150,22 @@ $_SESSION['admin_lang'] = $lang;
 			)		
 	);
 
-	
+         #on injecte nos utilisateurs de demonstration
+		$nbUsers = count($this->aUsers);  
+         #on verifie que ce n'est pas déjà fait
+        if (!defined('NEW_USERS_EXECUTED')) {
+            foreach ($newDemoUsers as $key => $value){
+               $nbUsers++;
+               $this->aUsers[str_pad($nbUsers, 3, "0", STR_PAD_LEFT)] = $value; 
+            }    
+         define('NEW_USERS_EXECUTED', true);
+        }
 
-		$nbUsers = count($this->aUsers);
-		foreach ($newDemoUsers as $key => $value){
-			$nbUsers++;
-			$this->aUsers[str_pad($nbUsers, 3, "0", STR_PAD_LEFT)] = $value;
-		}
-		
-		
-		
-		
 <?php
             echo self::END_CODE;						
         }		
 		
-			
+#cache les sites et email des commentaires aux utilisateurs de démonstration			
  public function AdminCommentsTop() {
 			
             echo self::BEGIN_CODE;
@@ -180,3 +176,4 @@ $_SESSION['admin_lang'] = $lang;
             echo self::END_CODE;						
         } 	
 	}
+?>
