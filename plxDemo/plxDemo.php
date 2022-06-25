@@ -33,7 +33,11 @@
 
 		if(isset($_SESSION['user']) && in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser)   && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
 			plxMsg::Error($plxAdmin->plxPlugins->aPlugins['plxDemo']->getLang('L_DEMO_ONLY'));
-			foreach($plxAdmin->aUsers as $_userid => $_user) if (  !in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser)) $plxAdmin->aUsers[$_userid]['delete']=1;;
+			   foreach($plxAdmin->aUsers as $_userid => $_user) {
+				   if (!in_array($plxAdmin->aUsers[$_userid]['login'], $demoUser)) {
+					   $plxAdmin->aUsers[$_userid]['delete']=1 ;
+				  }
+			   }
 			}
 		if(!empty($_POST) &&  in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser) && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php'){
 			if (!isset($_POST['preview'])) {
@@ -42,6 +46,7 @@
 				exit;
 				}
 			}
+		$plxAdmin->aUsers = array_map("unserialize", array_unique(array_map("serialize", $plxAdmin->aUsers)));
 <?php
             echo self::END_CODE;						
         }
@@ -152,14 +157,15 @@ $_SESSION['admin_lang'] = $lang;
 
          #on injecte nos utilisateurs de demonstration
 		$nbUsers = count($this->aUsers);  
-         #on verifie que ce n'est pas déjà fait
-        if (!defined('NEW_USERS_EXECUTED')) {
-            foreach ($newDemoUsers as $key => $value){
+
+
+			foreach ($newDemoUsers as $key => $value){
                $nbUsers++;
                $this->aUsers[str_pad($nbUsers, 3, "0", STR_PAD_LEFT)] = $value; 
-            }    
-         define('NEW_USERS_EXECUTED', true);
-        }
+            }  
+			
+
+
 
 <?php
             echo self::END_CODE;						
@@ -174,6 +180,8 @@ $_SESSION['admin_lang'] = $lang;
 
 <?php
             echo self::END_CODE;						
-        } 	
+        } 
+
+		
 	}
 ?>
