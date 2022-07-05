@@ -27,7 +27,7 @@
             echo self::BEGIN_CODE;
 ?>		 
 		if(basename($_SERVER['REQUEST_URI']) ==='auth.php?d=1') {header('Location: '.$_SERVER['HTTP_REFERER'].'?d=1');}
-		$getOkay= array('p','a','sel','d','page');
+		$getOkay= array('p','a','sel','d','page','help','c');
 		foreach ($_GET as $key => $value) if(!in_array($key , $getOkay)) $_GET[$key] =''; // tri sur $_GET
 
 		if(isset($_SESSION['user']) && @$plxAdmin->aUsers[$_SESSION['user']]['login'] ==='demo' && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
