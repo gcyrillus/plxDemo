@@ -28,7 +28,7 @@
             echo self::BEGIN_CODE;
 ?>
 		$demoUser = array( L_PROFIL_ADMIN, L_PROFIL_MANAGER , L_PROFIL_MODERATOR , L_PROFIL_EDITOR, L_PROFIL_WRITER );		
-		$getOkay= array('p','a','sel','d','page');
+		$getOkay= array('p','a','sel','d','page','help','c');
 		foreach ($_GET as $key => $value) if(!in_array($key , $getOkay)) $_GET[$key] =''; // tri sur $_GET
 
 		if(isset($_SESSION['user']) && in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser)   && basename($_SERVER['SCRIPT_FILENAME']) !== 'auth.php' ){
