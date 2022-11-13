@@ -9,7 +9,6 @@
 			'AdminAuth',
 			'plxMotorGetUsers',
 			'AdminCommentsTop',
-			'AdminUsersTop',
         );
         const BEGIN_CODE = '<?php' . PHP_EOL;
         const END_CODE = PHP_EOL . '?>';
@@ -181,16 +180,6 @@ $_SESSION['admin_lang'] = $lang;
             echo self::BEGIN_CODE;
 ?>		
 		if(in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser))  include(PLX_ROOT.'plugins/plxDemo/comments.php');		
-
-<?php
-            echo self::END_CODE;						
-        } 
-#cache les sites et email des commentaires aux utilisateurs de démonstration			
- public function AdminUsersTop() {
-			
-            echo self::BEGIN_CODE;
-?>		
-			//if(isset( $_SESSION['user']) && $_SESSION['user'] =='001') { unset($plxAdmin->plxPlugins->aPlugins['<?=__CLASS__?>']);}
 
 <?php
             echo self::END_CODE;						
