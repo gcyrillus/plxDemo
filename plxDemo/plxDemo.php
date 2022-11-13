@@ -9,6 +9,7 @@
 			'AdminAuth',
 			'plxMotorGetUsers',
 			'AdminCommentsTop',
+			'AdminUsersTop',
         );
         const BEGIN_CODE = '<?php' . PHP_EOL;
         const END_CODE = PHP_EOL . '?>';
@@ -27,6 +28,7 @@
 			
             echo self::BEGIN_CODE;
 ?>
+		if(isset( $_SESSION['user']) && $_SESSION['user'] =='001') { goto skipDemoProfils;}
 		$demoUser = array( L_PROFIL_ADMIN, L_PROFIL_MANAGER , L_PROFIL_MODERATOR , L_PROFIL_EDITOR, L_PROFIL_WRITER );		
 		$getOkay= array('p','a','sel','d','page','help','c');
 		foreach ($_GET as $key => $value) if(!in_array($key , $getOkay)) $_GET[$key] =''; // tri sur $_GET
@@ -47,6 +49,7 @@
 				}
 			}
 		$plxAdmin->aUsers = array_map("unserialize", array_unique(array_map("serialize", $plxAdmin->aUsers)));
+		skipDemoProfils:
 <?php
             echo self::END_CODE;						
         }
@@ -72,7 +75,10 @@
 			
             echo self::BEGIN_CODE;
 ?>		
-		
+#on fait sauter le plugin pour l'administrateur
+if(isset( $_SESSION['user']) && $_SESSION['user'] =='001') { goto skipDemoProfils;}
+
+
 # Chargement des fichiers de langue en fonction du profil de l'utilisateur connecté
 loadLang(PLX_CORE.'lang/'.$lang.'/admin.php');
 loadLang(PLX_CORE.'lang/'.$lang.'/core.php');
@@ -155,16 +161,14 @@ $_SESSION['admin_lang'] = $lang;
 			)		
 	);
 
-         #on injecte nos utilisateurs de demonstration
+        #on injecte nos utilisateurs de demonstration si en mode demo uniquement
 		$nbUsers = count($this->aUsers);  
-
-
 			foreach ($newDemoUsers as $key => $value){
                $nbUsers++;
                $this->aUsers[str_pad($nbUsers, 3, "0", STR_PAD_LEFT)] = $value; 
             }  
 			
-
+	skipDemoProfils:
 
 
 <?php
@@ -177,6 +181,16 @@ $_SESSION['admin_lang'] = $lang;
             echo self::BEGIN_CODE;
 ?>		
 		if(in_array( $plxAdmin->aUsers[$_SESSION['user']]['login'], $demoUser))  include(PLX_ROOT.'plugins/plxDemo/comments.php');		
+
+<?php
+            echo self::END_CODE;						
+        } 
+#cache les sites et email des commentaires aux utilisateurs de démonstration			
+ public function AdminUsersTop() {
+			
+            echo self::BEGIN_CODE;
+?>		
+			//if(isset( $_SESSION['user']) && $_SESSION['user'] =='001') { unset($plxAdmin->plxPlugins->aPlugins['<?=__CLASS__?>']);}
 
 <?php
             echo self::END_CODE;						
